@@ -2,6 +2,12 @@
 
 #include "Server.hpp"
 
+/*
+	Чат на клиент-серверной концепции.
+	Клиент отправляет заранее заданное сообщение с определенный интервалов времени.
+	Сервер записывает входящие сообщения в один файл.
+*/
+
 int main(int argc, char **argv)
 {
 	if (argc <= 4) {
@@ -25,8 +31,10 @@ int main(int argc, char **argv)
 	}
 
 	try {
+		// запуск сервера с указанием пути до файла:
 		Server server(argv[1]);
 
+		// инициализация клиентов:
 		bool success = true;
 		for (int i = 3; i < argc && success; i += 2) {
 			auto const delay_s = Client::seconds{atol(argv[i])};
@@ -39,6 +47,7 @@ int main(int argc, char **argv)
 			std::cout << "Reached the maximum of client amount" << std::endl;
 		}
 
+		// выполнение работы сервера:
 		server.run();
 	} catch (std::runtime_error const &err) {
 		std::cerr << err.what() << std::endl;
