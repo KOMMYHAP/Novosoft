@@ -10,6 +10,8 @@ using std::vector;
 
 #include "Client.hpp"
 
+/*	Менеджер клиентов управляет списком всех клиентов, 
+	подключенных к серверу.	*/
 class ClientManager
 {
 public:
@@ -23,11 +25,20 @@ public:
 
 	~ClientManager();
 
+	/*	Попытка добавить очередного клиента в список.
+		Если список переполнен - возращается false,
+		иначе - true. */
 	bool create(seconds delay_s, string const &msg);
 
+	/*	Сообщает всем клиентам, что прошло
+		elapsed_s секунд */
 	void update(seconds elapsed_s);
 
+	/*	Возвращает список всех клиентов */
 	vector<Client> const & clients() const;
+
+	/*	Возвращает список всех клиентов,
+		готовых к отправке сообщения */
 	vector<Client> readyClients() const;
 private:
 	vector<Client> _clients;

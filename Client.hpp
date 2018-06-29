@@ -7,6 +7,8 @@
 using std::string;
 using std::chrono::seconds;
 
+/* 	Client хранит индивидуальную информацию, 
+	а также имеет getter-ы для доступа к ней. */
 class Client
 {
 public:
