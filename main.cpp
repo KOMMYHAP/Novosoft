@@ -2,19 +2,6 @@
 
 #include "Server.hpp"
 
-
-seconds gcd(seconds a, seconds b)
-{
-	while (a != b) {
-		if (a > b) {
-			a -= b;
-		} else {
-			b -= a;
-		}
-	}
-	return a;
-}
-
 int main(int argc, char **argv)
 {
 	if (argc <= 4) {
