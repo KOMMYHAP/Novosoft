@@ -20,3 +20,8 @@ C:\test for Novosoft\chat.txt
 10:00:10; 0: hello
 10:00:14; 1: hi
 10:00:15; 0: hello
+
+Компиляция:
+	g++ -Wall -std=c++17 *.cpp -o chat.sh
+Запуск:
+	./chat.sh txt 5 1 q 2 ww 3 eee 4 rrrr 5 ttttt
