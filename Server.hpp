@@ -17,7 +17,6 @@ using std::string;
 class Server
 {
 public:
-	friend class Client;
 	using seconds = Client::seconds;
 
 public:
