@@ -20,17 +20,29 @@ public:
 	using seconds = Client::seconds;
 
 public:
+	/*	Создание сервера.
+		filepath: путь до файла, куда
+		будет записываться сообщения клиентов. */
 	Server(string const &filepath);
 
 	~Server();
 
+	/*	Добавление клиента на сервер.
+		delay_s: период отправки сообщения
+		msg: сообщение, посылаемое клиентом */
 	bool create_client(seconds delay_s, string const &msg);
 
+	/*	Выполнение полезной работы в бесконечном цикле */
 	void run();
 private:
-
+	/*	Запись информации о клиентe в файл.
+		Формат: [текущее время с точностью до секунды]; [номер клиента]: [текст сообщения] */
 	void sent(Client const &client);
 
+	/*	Вспомогательный функции для оптимизации бесконечного цикла в run()
+		gcd - поиск НОД
+		maximumDelay - поиск оптимального время сна
+	*/
 	seconds gcd(seconds, seconds) const;
 	seconds maximumDelay() const;
 private:
