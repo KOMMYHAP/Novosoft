@@ -7,7 +7,7 @@ Server::Server(string const &filepath)
 
 Server::~Server() {}
 
-bool Server::create_client(seconds delay_s, string const &msg)
+bool Server::createClient(seconds delay_s, string const &msg)
 {
 	return _client_manager_ptr->create(delay_s, msg);
 }

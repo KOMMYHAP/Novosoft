@@ -22,7 +22,7 @@ public:
 public:
 	/*	Создание сервера.
 		filepath: путь до файла, куда
-		будет записываться сообщения клиентов. */
+		будут записываться сообщения клиентов. */
 	Server(string const &filepath);
 
 	~Server();
@@ -30,7 +30,7 @@ public:
 	/*	Добавление клиента на сервер.
 		delay_s: период отправки сообщения
 		msg: сообщение, посылаемое клиентом */
-	bool create_client(seconds delay_s, string const &msg);
+	bool createClient(seconds delay_s, string const &msg);
 
 	/*	Выполнение полезной работы в бесконечном цикле */
 	void run();
