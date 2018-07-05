@@ -1,5 +1,10 @@
 #include "FileManager.hpp"
 
+// convert time to string:
+#include <iomanip>
+#include <ctime>
+#include <chrono>
+
 FileManager::FileManager(string const &filepath)
 	: _file(filepath)
 	, _filepath(filepath)
