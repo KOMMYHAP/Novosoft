@@ -2,11 +2,7 @@
 #define CLIENT_MANAGER_HPP
 
 #include <vector>
-#include <cstdint> /* uint8_t */
 #include <string>
-
-using std::string;
-using std::vector;
 
 #include "Client.hpp"
 
@@ -28,20 +24,21 @@ public:
 	/*	Попытка добавить очередного клиента в список.
 		Если список переполнен - возращается false,
 		иначе - true. */
-	bool create(seconds delay_s, string const &msg);
+	bool create(seconds delay_s, std::string const &msg);
 
 	/*	Сообщает всем клиентам, что прошло
 		elapsed_s секунд */
 	void update(seconds elapsed_s);
 
 	/*	Возвращает список всех клиентов */
-	vector<Client> const & clients() const;
+	std::vector<Client> const & clients() const;
 
 	/*	Возвращает список всех клиентов,
 		готовых к отправке сообщения */
-	vector<Client> readyClients() const;
+	std::vector<Client> readyClients() const;
 private:
-	vector<Client> _clients;
+	std::vector<Client> _clients;
+	seconds _elapsed_s;
 	id_t _max_id {0};
 };
 

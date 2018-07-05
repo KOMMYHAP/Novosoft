@@ -1,5 +1,8 @@
 #include "Client.hpp"
 
+using std::string;
+using std::chrono::seconds;
+
 Client::Client(id_t id, seconds const &delay_s, string const &msg)
 	: _message(msg)
 	, _id(id)

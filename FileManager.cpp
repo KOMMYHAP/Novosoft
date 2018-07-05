@@ -5,6 +5,9 @@
 #include <ctime>
 #include <chrono>
 
+using std::string;
+using std::ofstream;
+
 FileManager::FileManager(string const &filepath)
 	: _file(filepath)
 	, _filepath(filepath)

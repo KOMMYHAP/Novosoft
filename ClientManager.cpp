@@ -1,5 +1,10 @@
 #include "ClientManager.hpp"
 
+#include <cstdint> /* uint8_t */
+
+using std::string;
+using std::vector;
+
 ClientManager::ClientManager() {}
 
 ClientManager::~ClientManager() {}
@@ -30,9 +35,9 @@ vector<Client> ClientManager::readyClients() const
 {
 	vector<Client> result;
 	for (auto const &client : _clients) {
-		if (client.readyToSent()) {
+		if (client.readyToSend()) {
 			result.push_back(client);
-            client.resetElapsedTime();
+			client.resetElapsedTime();
 		}
 	}
 	return result;

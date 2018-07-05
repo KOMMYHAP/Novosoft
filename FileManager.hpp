@@ -6,9 +6,6 @@
 
 #include "Client.hpp"
 
-using std::ofstream;
-using std::string;
-
 class FileManager
 {
 public:
@@ -21,8 +18,8 @@ public:
 
 	void sent(Client const &);
 private:
-	ofstream _file;
-	string _filepath;
+	std::ofstream _file;
+	std::string _filepath;
 };
 
 #endif
