@@ -1,10 +1,12 @@
 #ifndef CLIENT_MANAGER_HPP
 #define CLIENT_MANAGER_HPP
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "Client.hpp"
+
+class ClientManagerImpl;
 
 /*	Менеджер клиентов управляет списком всех клиентов, 
 	подключенных к серверу.	*/
@@ -24,22 +26,23 @@ public:
 	/*	Попытка добавить очередного клиента в список.
 		Если список переполнен - возращается false,
 		иначе - true. */
-	bool create(seconds delay_s, std::string const &msg);
+	void create(seconds delay_s, std::string const &msg);
 
 	/*	Сообщает всем клиентам, что прошло
 		elapsed_s секунд */
 	void update(seconds elapsed_s);
 
+	seconds getOptimalDelayTime() const;
+
 	/*	Возвращает список всех клиентов */
-	std::vector<Client> const & clients() const;
+	std::vector<Client> clients() const;
 
 	/*	Возвращает список всех клиентов,
 		готовых к отправке сообщения */
 	std::vector<Client> readyClients() const;
+
 private:
-	std::vector<Client> _clients;
-	seconds _elapsed_s;
-	id_t _max_id {0};
+	ClientManagerImpl *_impl_ptr;
 };
 
 #endif
