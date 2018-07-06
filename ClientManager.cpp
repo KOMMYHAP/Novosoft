@@ -49,7 +49,7 @@ ClientManager::~ClientManager()
 	delete _impl_ptr;
 }
 
-void ClientManager::create(seconds delay_s, std::string const &msg)
+void ClientManager::createClient(seconds delay_s, std::string const &msg)
 {
 	_impl_ptr->emplace(delay_s, msg);
 }

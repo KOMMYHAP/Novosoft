@@ -26,7 +26,7 @@ public:
 	/*	Попытка добавить очередного клиента в список.
 		Если список переполнен - возращается false,
 		иначе - true. */
-	void create(seconds delay_s, std::string const &msg);
+	void createClient(seconds delay_s, std::string const &msg);
 
 	/*	Сообщает всем клиентам, что прошло
 		elapsed_s секунд */
