@@ -14,7 +14,6 @@ Client::Client(Client const &client)
 	: _message(client._message)
 	, _id(client._id)
 	, _delay_s(client._delay_s)
-	, _elapsed_s(client._elapsed_s)
 {}
 
 Client & Client::operator=(Client const &client)
@@ -23,7 +22,6 @@ Client & Client::operator=(Client const &client)
 		_message = client._message;
 		_id = client._id;
 		_delay_s = client._delay_s;
-		_elapsed_s = client._elapsed_s;
 	}
 
 	return *this;
@@ -31,21 +29,6 @@ Client & Client::operator=(Client const &client)
 
 Client::~Client()
 {}
-
-void Client::update(seconds elapsed_s)
-{
-	_elapsed_s += elapsed_s;
-}
-
-void Client::resetElapsedTime() const
-{
-    _elapsed_s = seconds{0};
-}
-
-bool Client::readyToSent() const
-{
-	return _elapsed_s >= _delay_s;
-}
 
 string const & Client::message() const {return _message;}
 Client::id_t Client::id() const {return _id;}

@@ -19,11 +19,6 @@ public:
 
 	~Client();
 
-	void update(seconds elapsed_s);
-    void resetElapsedTime() const;
-
-	bool readyToSent() const;
-
 	std::string const & message() const;
 	id_t id() const;
 	seconds delay() const;
@@ -31,9 +26,7 @@ public:
 private:
 	std::string _message;
 	id_t _id;
-
 	seconds _delay_s;
-	mutable seconds _elapsed_s {0};
 };
 
 
