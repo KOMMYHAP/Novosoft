@@ -1,7 +1,6 @@
 #ifndef CLIENT_MANAGER_HPP
 #define CLIENT_MANAGER_HPP
 
-#include <string>
 #include <vector>
 
 #include "Client.hpp"
@@ -15,6 +14,7 @@ class ClientManager
 public:
 	using id_t = Client::id_t;
 	using seconds = Client::seconds;
+	using storage_t = std::vector<Client>;
 
 	ClientManager();
 
@@ -35,11 +35,11 @@ public:
 	seconds getOptimalDelayTime() const;
 
 	/*	Возвращает список всех клиентов */
-	std::vector<Client> clients() const;
+	storage_t clients() const;
 
 	/*	Возвращает список всех клиентов,
 		готовых к отправке сообщения */
-	std::vector<Client> readyClients() const;
+	storage_t readyClients() const;
 
 private:
 	ClientManagerImpl *_impl_ptr;
