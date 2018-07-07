@@ -1,60 +1,53 @@
 #include "Server.hpp"
 
-Server::Server(string const &filepath) 
+#include <iostream> /* cerr in run() */
+#include <stdexcept> /* runtime_error */
+#include <algorithm> /* max_element */
+#include <thread>
+
+#include <chrono>
+
+Server::Server(std::string const &filepath) 
 	: _client_manager_ptr(new ClientManager())
 	, _file_manager_ptr(new FileManager(filepath))
 {}
 
 Server::~Server() {}
 
-bool Server::createClient(seconds delay_s, string const &msg)
+bool Server::createClient(seconds delay_s, std::string const &msg)
 {
 	return _client_manager_ptr->create(delay_s, msg);
 }
 
 void Server::run()
 {
-	seconds maximum_step = maximumDelay();
+	seconds 
+		optimal_time_step_s = _client_manager_ptr->getOptimalDelay(),
+		delay_s {0};
 
-	vector<Client> readyClients;
+	chrono::steady_clock::time_point start_tp, end_tp;
 	while (true) {
-		 std::this_thread::sleep_for(maximum_step);
-		_client_manager_ptr->update(maximum_step);
+		 std::this_thread::sleep_for(optimal_time_step_s);
 
-		readyClients = _client_manager_ptr->readyClients();
-		try {
-			for (auto const &client : readyClients) {
-				sent(client);
+		 start_tp = chrono::steady_clock::now();
+		 {
+			_client_manager_ptr->update(optimal_time_step_s + delay_s);
+
+			auto const readyClients = _client_manager_ptr->readyClients();
+			try {
+				for (auto const &client : readyClients) {
+					send(client);
+				}
+			} catch (std::runtime_error const &err) {
+				std::cerr << err.what() << std::endl;
 			}
-		} catch (std::runtime_error const &err) {
-			std::cerr << err.what() << std::endl;
 		}
+		end_tp = chrono::steady_clock::now();
+		delay_s = chrono::duration_cast<seconds>(end_tp - start_tp);
 	}
 }
 
-void Server::sent(Client const &client)
+void Server::send(Client const &client)
 {
 	_file_manager_ptr->sent(client);
-}
-
-seconds Server::gcd(seconds a, seconds b) const
-{
-	while (a != b) {
-		if (a > b) {
-			a -= b;
-		} else {
-			b -= a;
-		}
-	}
-	return a;
-}
-
-seconds Server::maximumDelay() const
-{
-	auto const &clients = _client_manager_ptr->clients();
-	seconds temp = clients[0].delay();
-	for (size_t i = 1; i < clients.size(); ++i) {
-		temp = gcd(temp, clients[i].delay());
-	}
-	return temp;
 }
