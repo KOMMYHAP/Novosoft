@@ -32,3 +32,9 @@ ClientManager::storage_t ClientManager::readyClients() const
 	auto const &_clients = _impl_ptr->readyClients();
 	return std::vector<Client>(_clients.cbegin(), _clients.cend());	
 }
+
+ClientManager::seconds 
+ClientManager::getOptimalDelayTime() const
+{
+	return _impl_ptr->getOptimalDelayTime();
+}
