@@ -17,7 +17,7 @@ public:
 	Client(Client const &);
 	Client & operator=(Client const &);
 
-	~Client();
+	~Client() = default;
 
 	std::string const & message() const;
 	id_t id() const;

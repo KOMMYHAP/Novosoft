@@ -1,5 +1,7 @@
 #include "Client.hpp"
 
+#include <stdexcept> /* runtime_error */
+
 using std::string;
 using std::chrono::seconds;
 
@@ -7,8 +9,11 @@ Client::Client(id_t id, seconds const &delay_s, string const &msg)
 	: _message(msg)
 	, _id(id)
 	, _delay_s(delay_s)
-{}
-
+{
+	if (_delay_s == seconds{0}) {
+		throw std::runtime_error{"Client's delay_s must be positive integer"};
+	}
+}
 
 Client::Client(Client const &client)
 	: _message(client._message)
@@ -26,9 +31,6 @@ Client & Client::operator=(Client const &client)
 
 	return *this;
 }
-
-Client::~Client()
-{}
 
 string const & Client::message() const {return _message;}
 Client::id_t Client::id() const {return _id;}
