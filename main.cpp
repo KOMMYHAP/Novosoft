@@ -35,16 +35,9 @@ int main(int argc, char **argv)
 		Server server(argv[1]);
 
 		// инициализация клиентов:
-		bool success = true;
-		for (int i = 3; i < argc && success; i += 2) {
+		for (int i = 3; i < argc; i += 2) {
 			auto const delay_s = Client::seconds{atol(argv[i])};
-			if (delay_s == Client::seconds{0}) {
-				throw std::runtime_error("client_delay_s must be positive integer");
-			}
-			success = server.createClient(delay_s, argv[i + 1]);
-		}
-		if (!success) {
-			std::cout << "Reached the maximum of client amount" << std::endl;
+			server.createClient(delay_s, argv[i + 1]);
 		}
 
 		// выполнение работы сервера:
