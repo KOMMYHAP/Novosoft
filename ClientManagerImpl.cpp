@@ -21,7 +21,7 @@ void ClientManagerImpl::update(seconds elapsed_s)
 	if (!_clients.empty()) {
 		auto const max_delay_s = _clients.crbegin()->delay();
 		if (_elapsed_s >= max_delay_s) {
-			elapsed_s += max_delay_s - _elapsed_s;
+			elapsed_s += _elapsed_s - max_delay_s;
 			resetElapsedTime();
 		}
 
@@ -53,6 +53,9 @@ ClientManagerImpl::storage_t  ClientManagerImpl::readyClients() const
 	for (auto const client : _clients) {
 		if (_elapsed_s % client.delay() == seconds{0}) {
 			result.push_back(client);
+		}
+		if (client.delay() >= _elapsed_s) {
+			break;
 		}
 	}
 	return result;
