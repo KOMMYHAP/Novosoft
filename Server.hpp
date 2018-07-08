@@ -1,7 +1,7 @@
 #ifndef SERVER_HPP
 #define SERVER_HPP
 
-#include <utility> /* unique_ptr */
+#include <memory> /* unique_ptr */
 
 #include "Client.hpp"
 #include "ClientManager.hpp"
@@ -27,7 +27,7 @@ public:
 	/*	Добавление клиента на сервер.
 		delay_s: период отправки сообщения
 		msg: сообщение, посылаемое клиентом */
-	bool createClient(seconds delay_s, std::string const &msg);
+	void createClient(seconds delay_s, std::string const &msg);
 
 	/*	Выполнение полезной работы в бесконечном цикле */
 	void run();
