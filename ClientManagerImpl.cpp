@@ -20,7 +20,7 @@ void ClientManagerImpl::update(seconds elapsed_s)
 {
 	if (!_clients.empty()) {
 		auto const max_delay_s = _clients.crbegin()->delay();
-		if (_elapsed_s >= max_delay_s) {
+		if (_elapsed_s > max_delay_s) {
 			elapsed_s += _elapsed_s - max_delay_s;
 			resetElapsedTime();
 		}
