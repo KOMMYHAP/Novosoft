@@ -5,10 +5,7 @@
 #include <ctime>
 #include <chrono>
 
-using std::string;
-using std::ofstream;
-
-FileManager::FileManager(string const &filepath)
+FileManager::FileManager(std::string const &filepath)
 	: _file(filepath)
 	, _filepath(filepath)
 {
@@ -17,7 +14,7 @@ FileManager::FileManager(string const &filepath)
 
 FileManager::~FileManager() {}
 
-void FileManager::sent(Client const &client)
+void FileManager::send(Client const &client)
 {
 	auto const time_now = std::chrono::system_clock::now();
 	auto const time_now_c = std::chrono::system_clock::to_time_t(time_now);

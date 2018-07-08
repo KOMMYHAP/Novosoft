@@ -9,14 +9,14 @@
 class FileManager
 {
 public:
-	FileManager(string const &filepath);
+	FileManager(std::string const &filepath);
 
 	FileManager(FileManager const &) = delete;
 	FileManager& operator=(FileManager const &) = delete;
 
 	~FileManager();
 
-	void sent(Client const &);
+	void send(Client const &);
 private:
 	std::ofstream _file;
 	std::string _filepath;
